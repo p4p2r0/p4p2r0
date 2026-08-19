@@ -3,8 +3,6 @@
 ![Profile views](https://komarev.com/ghpvc/?username=p4p2r0&color=0e75b6)
 [![Follow on GitHub](https://img.shields.io/github/followers/p4p2r0?label=Follow&style=social)](https://github.com/p4p2r0)
 
----
-
 ## Repositories
 
 <!-- START:repos -->
@@ -18,7 +16,5 @@
 - [network-sniffer](https://github.com/p4p2r0/network-sniffer) — TUI network packet sniffer. · Updated: 2026-08-08
 <!-- END:repos -->
 
----
-
-## Contact & contribution
+## Contact
 - Email: [p4p2r0@proton.me](mailto:p4p2r0@proton.me)  
