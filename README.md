@@ -6,7 +6,6 @@
 ---
 
 ## Repositories
-All repositories are shown here. This section can be auto-generated and updated on a schedule (recommended) so it always lists every repo and a short description.
 
 <!-- START:repos -->
 <!-- The "repos" section is auto-generated — enable the README updater action to populate this automatically. -->
