@@ -1,0 +1,108 @@
+name: Update README Repos
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # weekly on Monday 02:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update README repos section
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Configuration
+            const username = context.repo.owner; // profile repo owner (your username)
+            const excludeForks = true;           // change to false to include forks
+            const excludeArchived = true;        // change to false to include archived repos
+            const sortBy = 'updated';            // 'updated' | 'stars' | 'name'
+            const per_page = 100;
+
+            // Fetch public repos for the user (handles pagination)
+            let page = 1;
+            let repos = [];
+            while (true) {
+              const res = await github.rest.repos.listForUser({
+                username,
+                per_page,
+                page,
+              });
+              repos = repos.concat(res.data);
+              if (res.data.length < per_page) break;
+              page++;
+            }
+
+            // Filter repos
+            repos = repos.filter(r => !excludeForks || !r.fork)
+                         .filter(r => !excludeArchived || !r.archived)
+                         .filter(r => r.private === false); // ensure only public repos
+
+            // Sort repos
+            if (sortBy === 'stars') {
+              repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+            } else if (sortBy === 'name') {
+              repos.sort((a, b) => a.name.localeCompare(b.name));
+            } else {
+              repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+            }
+
+            // Build markdown lines
+            const lines = repos.map(r => {
+              const desc = r.description ? r.description.replace(/\n/g, ' ') : '';
+              const stars = r.stargazers_count ? ` ⭐ ${r.stargazers_count}` : '';
+              const updated = new Date(r.updated_at).toISOString().split('T')[0];
+              return `- [${r.name}](${r.html_url}) — ${desc}${stars} · Updated: ${updated}`;
+            }).join('\n');
+
+            const startMarker = '<!-- START:repos -->';
+            const endMarker = '<!-- END:repos -->';
+
+            // Get README.md (create if not present)
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            let readme;
+            try {
+              readme = await github.rest.repos.getContent({ owner, repo, path: 'README.md' });
+            } catch (err) {
+              // README doesn't exist — create a basic template with markers
+              const initial = `# I'm ${username}\n\n${startMarker}\n${endMarker}\n`;
+              await github.rest.repos.createOrUpdateFileContents({
+                owner, repo, path: 'README.md',
+                message: 'chore: create README.md for repo list',
+                content: Buffer.from(initial, 'utf8').toString('base64'),
+              });
+              readme = await github.rest.repos.getContent({ owner, repo, path: 'README.md' });
+            }
+
+            const content = Buffer.from(readme.data.content, 'base64').toString('utf8');
+
+            // Replace or append the auto-generated section
+            let newContent;
+            if (content.includes(startMarker) && content.includes(endMarker)) {
+              const before = content.split(startMarker)[0];
+              const after = content.split(endMarker)[1];
+              newContent = before + startMarker + '\n' + lines + '\n' + endMarker + after;
+            } else {
+              newContent = content + '\n' + startMarker + '\n' + lines + '\n' + endMarker + '\n';
+            }
+
+            if (newContent === content) {
+              console.log('README up-to-date; no changes to commit.');
+            } else {
+              await github.rest.repos.createOrUpdateFileContents({
+                owner, repo, path: 'README.md',
+                message: 'chore: update repos list',
+                content: Buffer.from(newContent, 'utf8').toString('base64'),
+                sha: readme.data.sha,
+              });
+              console.log('README updated with repo list.');
+            }
