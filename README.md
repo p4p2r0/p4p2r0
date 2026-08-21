@@ -6,8 +6,8 @@
 ## Repositories
 
 <!-- START:repos -->
+- [p4p2r0](https://github.com/p4p2r0/p4p2r0) — Profile · Updated: 2026-08-21
 - [breach-checker](https://github.com/p4p2r0/breach-checker) — Password and email breach checker · Updated: 2026-08-20
-- [p4p2r0](https://github.com/p4p2r0/p4p2r0) — Profile · Updated: 2026-08-20
 - [password-generator](https://github.com/p4p2r0/password-generator) — A cryptographically secure password generator · Updated: 2026-08-19
 - [network-sniffer](https://github.com/p4p2r0/network-sniffer) — TUI network packet sniffer · Updated: 2026-08-19
 - [cyber-news](https://github.com/p4p2r0/cyber-news) — A cybersecurity news website · Updated: 2026-08-19
