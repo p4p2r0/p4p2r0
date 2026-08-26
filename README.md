@@ -1,14 +1,17 @@
 # I'm p4p2r0
 
-![Profile views](https://komarev.com/ghpvc/?username=p4p2r0&color=0e75b6)
-[![Follow on GitHub](https://img.shields.io/github/followers/p4p2r0?label=Follow&style=social)](https://github.com/p4p2r0)
-
 ## Repositories
 
 <!-- START:repos -->
-<!-- The "repos" section is auto-generated - enable the README updater action to populate this automatically. -->
 <!-- END:repos -->
 
+## Support
+
+If you find my work useful, donations are appreciated:
+
+* XMR: `8B86A6HgMiaLDUqLGgJ1359i8nV54Rd3cWRE6ZNepsjY94vCimXUcVeVfX4h6drv446fGGoaFxaLhXXLYYxMuzNyCcRBpRW`
+* BTC: `bc1qdkanx49p490kqe0galcu9pr0rv05pky3a9lknh`
 
 ## Contact
+
 * Email: [p4p2r0@proton.me](mailto:p4p2r0@proton.me)
