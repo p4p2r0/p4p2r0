@@ -1,6 +1,6 @@
 # I'm p4p2r0
 
-I like software development and penetration testing.
+I like software development and penetration testing. I mostly use Python right now, but I’m learning Rust and want to rewrite all my projects from scratch.
 
 ## Repositories
 
