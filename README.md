@@ -14,7 +14,6 @@ I like software development and penetration testing.
 | [password-generator](https://github.com/p4p2r0/password-generator) | A cryptographically secure password generator |  | 2026-08-26 |
 | [file-integrity-monitor](https://github.com/p4p2r0/file-integrity-monitor) | Real-time file and directory integrity monitor |  | 2026-08-26 |
 | [cyber-news](https://github.com/p4p2r0/cyber-news) | A cybersecurity news website |  | 2026-08-26 |
-| [old-network-sniffer](https://github.com/p4p2r0/old-network-sniffer) | ARP spoofing & MITM attack |  | 2026-08-25 |
 | [minesweeper](https://github.com/p4p2r0/minesweeper) | A modern Minesweeper game |  | 2026-08-19 |
 <!-- END:repos -->
 
